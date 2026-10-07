@@ -1,0 +1,23 @@
+# Tutto cio' che e' locale e pesante: client del gioco, Ghidra, JDK, dump, output RE
+_local/
+
+# I file del client NON vanno mai in git (copyright XLGames)
+*.pak
+game_pak
+*.sqlite3
+*.dmp
+
+# Build
+bin/
+obj/
+dist/
+*.user
+.vs/
+
+# Obsidian: stato personale dell'editor (il vault e le impostazioni dei plugin restano)
+wiki/.obsidian/workspace*.json
+wiki/.obsidian/plugins/karpathywiki/pdf-cache/
+wiki/.obsidian/plugins/karpathywiki/data.json
+
+# Plugin di terze parti: si installa da Obsidian (Karpathy LLM Wiki), non si versiona
+wiki/.obsidian/plugins/
