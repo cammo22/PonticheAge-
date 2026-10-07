@@ -14,7 +14,7 @@ tools/ghidra/ghidra.sh 'C:\Users\cammo\Desktop\PONTIC~1.0\_local\re\ghidra-proj'
 # domande su un file gia' analizzato (~1 minuto)
 tools/ghidra/ghidra.sh <progetto> AA9 -process <file> -noanalysis -scriptPath <scripts> -postScript Decomp.java <out> <stringa>
 ```
-Il percorso del progetto ha uno spazio: si usa sempre il nome corto `PONTIC~1.0`.
+Il percorso del progetto ha uno spazio: si usa sempre il nome corto `PONTIC~1.0`, con le barre `/` (`cygpath -m "$(cygpath -d <percorso>)"`), e `< /dev/null` perche' il .bat alla fine chiede di premere un tasto.
 
 | Script (`tools/ghidra`) | Cosa fa |
 |---|---|

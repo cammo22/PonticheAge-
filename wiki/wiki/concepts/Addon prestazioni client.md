@@ -21,3 +21,7 @@ Niente correzioni alla cieca: si registrano i tempi di ogni fotogramma (PresentM
 
 ## Come si aggancia
 Una DLL nostra caricata dal launcher all'avvio del client. Le DLL di rendering (`cryrenderd3d10.dll`, `cryrenderd3d9.dll`) **non sono protette** da [[Themida]]: si analizzano subito con [[Ghidra]].
+
+## Scoperte (2026-10-07, Ghidra su `cryrenderd3d10.dll`)
+Il renderer ha le variabili del motore per gli shader asincroni e la loro cache: `r_ShadersAsyncCompiling`, `r_ShadersAsyncActivation`, `r_ShadersAsyncReading`, `r_ShadersAsyncMaxThreads`, `r_ShadersPreactivate`, `r_PreloadUserShaderCache`, `r_ShadersLogCacheMisses`, `r_ShadersSaveList`, `r_shadersdontflush`, `r_MultiThreaded`. Primo esperimento: attivare compilazione asincrona + precaricamento della cache e misurare con PresentMon; `r_ShadersLogCacheMisses` dice quali shader mancano, per precompilarli.
+Elenco completo delle stringhe: `_local/re/out/cryrenderd3d10.dll.strings.tsv` (10.940 righe).
