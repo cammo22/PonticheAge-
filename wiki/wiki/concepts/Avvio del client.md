@@ -33,3 +33,17 @@ Primo tentativo: finestra "ArcheAge Error / Failed to load commands!" e chiusura
 
 ## Nota: cartella Documenti condivisa
 `Documenti\ArcheAge` e' usata da **tutte** le installazioni di ArcheAge del PC (ci sono anche log di altri client del 6 ottobre). Il Patcher.log di prima e' stato sovrascritto. PonticheAge dovra' usare una cartella sua ([[Client multipli]]).
+
+### Seconda prova: stesso errore anche dalla cartella giusta
+Non si crea nessun file (niente `ArcheAge.log`): il client muore prima di scrivere log. La cartella di lavoro non era quindi la causa (o non l'unica).
+
+### Il caricatore `archeage.exe` (dal 10.0.2 non protetto, `_local/re/out/loader10.c`)
+1. **Istanze**: crea il mutex `ArcheAge_<suffisso>`; se esiste gia', chiede "There is already a x2client application running / Do you want to start another one?" (Si' = continua). **Non chiude** nulla.
+2. Se ha meno di 1 argomento: avvia `bin32\patcher.exe` ("restarting patcher...") e si chiude. Ecco perche' il doppio clic apre il patcher.
+3. `XlSetWorkingDir`, poi crea un collegamento (junction) `Documents` che punta a `Documenti\ArcheAge`: tutte le installazioni condividono quella cartella.
+4. Opzioni: `-reset_env` / `-reset_env_s` (svuota la cartella dei salvataggi!), `-devmode` (carica `x2game-dev.dll`, anche da `devmode.cfg`), `-fulldump`.
+5. Carica `x2game.dll` e chiama `CreateGameStartup`.
+Attenzione: il 10.0.2 e' la build cinese ("shanggushiji" nel percorso del pdb), il 9.0.2.9 e' coreano: nel 9.0.2.9 il collegamento `Documents` non viene creato, quindi il caricatore e' diverso.
+
+### Prossimo passo
+Quando compare "Failed to load commands!" il processo resta vivo finche' non si preme OK, con i moduli gia' decifrati e GameGuard non ancora partito: e' il momento giusto per il dumper (`tools/dumper/dump_modules.py`, aggiornato con argomenti e cartella giusti). In attesa dell'utente.

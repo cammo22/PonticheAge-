@@ -19,3 +19,6 @@ aliases: [Piu client, Multi client, Altri ArcheAge]
 2. Nella **nostra** copia del client: nomi nostri per mutex, classe e titolo della finestra, cartella delle impostazioni separata (ArcheAge scrive in `Documenti\ArcheAge`: due versioni nella stessa cartella si danneggiano a vicenda), eseguibile con nome e icona PonticheAge.
 3. Il [[Launcher]] non chiude mai processi fuori dalla cartella PonticheAge e non tocca le altre installazioni.
 4. Test: un altro ArcheAge aperto + PonticheAge aperto, entrambi restano vivi per 10 minuti.
+
+## Scoperta (2026-10-07): il caricatore non chiude gli altri
+Nel caricatore 10.0.2 il controllo e' solo un mutex `ArcheAge_<suffisso>` con domanda "Do you want to start another one?" ([[Avvio del client]]). Chi chiude gli altri client e' quindi con buona probabilita' il **patcher** o l'**anti-cheat** di un'altra installazione. Il nostro [[Launcher]] non usera' il patcher XLGames; al mutex daremo un nome nostro, cosi' non compare nemmeno la domanda.

@@ -2,7 +2,10 @@
 
 Registra anche cosa fa il client nei primi secondi: moduli caricati, finestre create, processi figli.
 
-Uso:  python tools/dumper/dump_modules.py --client _local/client --out _local/re/dump [--seconds 40]
+Uso:  python tools/dumper/dump_modules.py --client _local/client --out _local/re/dump [--seconds 45]
+
+Il client 9.0.2.9 mostra "Failed to load commands!" e resta fermo sulla finestra di errore finche' non si preme OK:
+in quel momento i moduli sono gia' decifrati. NON premere OK finche' lo script non ha finito.
 """
 import argparse, ctypes, ctypes.wintypes as wt, json, os, struct, subprocess, sys, time
 
@@ -133,12 +136,13 @@ def main():
     ap.add_argument("--client", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--seconds", type=int, default=40)
-    ap.add_argument("--args", default="-StrUserName ponte -strUserToken test -serverId 1 -sIp 127.0.0.1 -sPort 1237 -gameId 1")
+    ap.add_argument("--args", default="-y -locale en_us -instant_token ponticheage-test")  # formato preso dal patcher
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     exe = os.path.abspath(os.path.join(a.client, "bin64", "archeage.exe"))
     before = {p[0] for p in processes()}
-    proc = subprocess.Popen([exe] + a.args.split(), cwd=os.path.dirname(exe))
+    # cartella di lavoro = cartella del client (dove sta game_pak), come fa il patcher
+    proc = subprocess.Popen([exe] + a.args.split(), cwd=os.path.abspath(a.client))
     t0, log, seen_mods, seen_wnd, seen_proc, dumped = time.time(), [], set(), set(), set(), {}
     family = {proc.pid}
 
