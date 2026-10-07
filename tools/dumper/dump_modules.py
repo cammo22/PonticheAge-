@@ -4,8 +4,8 @@ Registra anche cosa fa il client nei primi secondi: moduli caricati, finestre cr
 
 Uso:  python tools/dumper/dump_modules.py --client _local/client --out _local/re/dump [--seconds 45]
 
-Il client 9.0.2.9 mostra "Failed to load commands!" e resta fermo sulla finestra di errore finche' non si preme OK:
-in quel momento i moduli sono gia' decifrati. NON premere OK finche' lo script non ha finito.
+La riga di comando e' quella del patcher (tools/launch/cmdline.py): il client arriva alla schermata di login
+e resta aperto ~60-70 s cercando il server; i moduli sono gia' decifrati da quando compare la finestra.
 """
 import argparse, ctypes, ctypes.wintypes as wt, json, os, struct, subprocess, sys, time
 
@@ -135,10 +135,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--client", required=True)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--seconds", type=int, default=40)
-    ap.add_argument("--args", default="-y -locale en_us -instant_token ponticheage-test")  # formato preso dal patcher
+    ap.add_argument("--seconds", type=int, default=60)
+    ap.add_argument("--args", default=None, help="default: riga del patcher generata da tools/launch/cmdline.py")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
+    if a.args is None:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "launch"))
+        import cmdline
+        a.args = cmdline.build_blob("127.0.0.1", 1237) + " -y -locale en_us -instant_token ponticheage-test"
     exe = os.path.abspath(os.path.join(a.client, "bin64", "archeage.exe"))
     before = {p[0] for p in processes()}
     # cartella di lavoro = cartella del client (dove sta game_pak), come fa il patcher
