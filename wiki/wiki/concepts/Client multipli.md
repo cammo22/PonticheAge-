@@ -22,3 +22,6 @@ aliases: [Piu client, Multi client, Altri ArcheAge]
 
 ## Scoperta (2026-10-07): il caricatore non chiude gli altri
 Nel caricatore 10.0.2 il controllo e' solo un mutex `ArcheAge_<suffisso>` con domanda "Do you want to start another one?" ([[Avvio del client]]). Chi chiude gli altri client e' quindi con buona probabilita' il **patcher** o l'**anti-cheat** di un'altra installazione. Il nostro [[Launcher]] non usera' il patcher XLGames; al mutex daremo un nome nostro, cosi' non compare nemmeno la domanda.
+
+## Il semaforo `ArcheAge_SMP` (2026-10-07)
+Nel 10.0.2 (`x2game`, `FUN_3991b240`): `CreateSemaphoreA(NULL, 2, 2, "ArcheAge_SMP")` + attesa di 100 ms. Un oggetto di sistema con **2 posti** condiviso da **tutte** le installazioni di ArcheAge: dal terzo client in poi il posto non c'e'. Nel nostro client va rinominato. Siccome `x2game.dll` e' protetta, il modo pulito e' un **addon nostro** che intercetta `CreateSemaphoreA`/`CreateMutexA` e rinomina gli oggetti `ArcheAge_*` in `PonticheAge_*`: niente modifiche ai file protetti.

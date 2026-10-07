@@ -47,3 +47,39 @@ Attenzione: il 10.0.2 e' la build cinese ("shanggushiji" nel percorso del pdb), 
 
 ### Prossimo passo
 Quando compare "Failed to load commands!" il processo resta vivo finche' non si preme OK, con i moduli gia' decifrati e GameGuard non ancora partito: e' il momento giusto per il dumper (`tools/dumper/dump_modules.py`, aggiornato con argomenti e cartella giusti). In attesa dell'utente.
+
+
+## RISOLTO: "Failed to load commands!" (2026-10-07)
+Causa: mancava il **primo argomento**. Il patcher (`FUN_00490670`) costruisce la riga di comando cosi':
+```
+archeage.exe <16 caratteri> -y -locale <lingua> -instant_token <token>
+```
+I 16 caratteri sono i "commands": 12 byte con **IP e porta del server di login**, 4 byte casuali, un checksum e un flag, in XOR con una chiave e codificati con il base64 di `xlcommon.dll` (alfabeto `./0-9A-Za-z`). Dettagli e codice: `tools/launch/cmdline.py` (con test andata/ritorno).
+Altre modalita' viste nel patcher: `-k [chiave]` (in questo client si chiude subito, codice 0) e `-j a|b|c|d|e|f|g h`.
+
+### Cosa fa il client con la riga giusta (prova del 2026-10-07)
+| Secondi | Evento |
+|---|---|
+| ~1 | carica `crysystem`, `cryaction`; poi rete, suono, grafica (D3D9) |
+| ~44 | finestra "- ArcheAge - 9.0.2.9.KX (r.590504) Sep 21 2022 (11:18:58)" |
+| ~60 | carica la scena di login `loginbg4` |
+| ~64 | collegamento HTTPS a `52.9.67.121:443` (`ec2-52-9-67-121.us-west-1.compute.amazonaws.com`): telemetria o anti-cheat XLGames, **da bloccare** nel nostro client |
+| ~66 | si collega al **nostro** IP:porta di login |
+| senza server | si chiude con codice 1 |
+
+`tools/avvia-client-test.cmd` ora genera da solo la riga giusta (richiede Python).
+
+## Primo pacchetto di login (2026-10-07)
+Catturato con `tools/launch/sniff_login.py` (copia in `raw/login_first.bin`). 55 byte, **in chiaro**:
+```
+35 00 15 00 0a 00 00 00 08 00 00 00 00 00 08 00
+00 00 00 00 00 00 00 00 08 00 74 56 3c b6 ee a0
+00 00 10 00 70 6f 6e 74 69 63 68 65 61 67 65 2d   ....ponticheage-
+74 65 73 74 01 00 01                              test...
+```
+- `35 00` lunghezza (53 byte dopo questo campo), `15 00` tipo di pacchetto 0x15
+- `0a 00 00 00` = 10: lo stesso valore che il patcher scrive per i token istantanei
+- campi da 8 byte con lunghezza `08 00` (uno vuoto, uno `74 56 3c b6 ee a0 00 00`: forse un identificativo della macchina)
+- `10 00` + `ponticheage-test`: il nostro token
+- coda `01 00 01`
+Significato preciso dei campi: da confermare quando avremo `x2game.dll` estratta. Vedi [[Protocollo di rete]].

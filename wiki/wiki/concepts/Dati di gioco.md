@@ -6,7 +6,7 @@ aliases: [game_pak, Database del client]
 # Dati di gioco
 
 ## game_pak
-File unico da 49,6 GB in `_local/client/game_pak` (52.034.150.912 byte). Contiene i file del gioco (livelli, modelli, Lua dell'interfaccia, database). Formato e chiavi del 9.0.2.9: **da ricavare** (la tabella dei file e' cifrata). Il lettore sara' `Ponte.Data`, scritto da noi e verificato estraendo file noti.
+File unico da 49,6 GB in `_local/client/game_pak` (52.034.150.912 byte). Contiene i file del gioco (livelli, modelli, Lua dell'interfaccia, database). **Letto il 2026-10-07** con `tools/pak/pak_list.ps1`: intestazione `WIBO` in coda al file (AES-128-CBC, chiave pubblica nota del formato ArcheAge), 380.269 file + 494 extra, tabella dei file subito prima (voci da 0x150 byte, ognuna cifrata a se' con IV zero). I dati dei file sono **in chiaro**. Elenco completo in `_local/re/out/game_pak.files.tsv`. Il database del client e' `game/db/compact.sqlite` (59 MB). `game/version.txt` = `VERSION 9,0,2,9`.
 
 ## Database del client
 Atteso in `game/db/` dentro il game_pak (sqlite, probabilmente cifrato). Contiene oggetti, skill, buff, quest, ricette, gradi di potenziamento, pass, negozi, testi localizzati. Il server lo converte al primo avvio in un formato suo, piu' veloce, e lo usa in sola lettura.

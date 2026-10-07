@@ -5,7 +5,7 @@ aliases: [Protocollo, Pacchetti, Opcode]
 ---
 # Protocollo di rete (9.0.2.9)
 
-> Stato: **da ricavare**. Niente qui e' ancora verificato sul client 9.0.2.9.
+> Stato: **iniziato**. Primo pacchetto di login catturato il 2026-10-07 (vedi [[Avvio del client]]): il login e' **in chiaro**, intestazione `lunghezza u16` + `tipo u16`. Il client sceglie IP/porta del login dal primo argomento della riga di comando.
 
 ## Come lo ricaviamo
 1. Dump di `x2game.dll` e `crynetwork.dll` dalla memoria ([[Themida]]).
