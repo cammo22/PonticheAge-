@@ -19,6 +19,12 @@ archeage.exe -y -locale <lingua> -instant_token <codice>
 
 File di prova: `tools/avvia-client-test.cmd` (doppio clic; opzionale `ko`).
 
+### "Failed to load commands!" (2026-10-07)
+Primo tentativo: finestra "ArcheAge Error / Failed to load commands!" e chiusura immediata, nessun `ArcheAge.log`.
+- Il messaggio sta in `crysystem.dll` (nel 10.0.2 non protetto: funzione `FUN_365e2310`, MessageBox + TerminateProcess, chiamata solo in modo indiretto).
+- Le stringhe accanto sono quelle del caricamento dei file di configurazione (`exec`, "executes a batch file of console commands", `game/`, `config/`, `game/config/`): il client non trovava i suoi file.
+- Causa probabile: lo script avviava il gioco con cartella di lavoro `bin64`; il patcher invece parte dalla cartella principale (`%sin32rcheage.exe`), dove sta `game_pak`. Script corretto: `cd` nella cartella del client, poi `bin64rcheage.exe`.
+
 ## Altre stringhe utili nel patcher
 - `ArcheAge_SMP`: candidato per il nome dell'oggetto che il client usa per riconoscere le altre istanze → [[Client multipli]].
 - `SOFTWARE\XLGAMES\ArcheAge`: chiave di registro condivisa tra installazioni → da separare per PonticheAge.

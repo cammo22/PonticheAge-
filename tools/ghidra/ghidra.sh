@@ -6,4 +6,5 @@ ROOT="$(cygpath -u "$(cygpath -d "$(cd "$(dirname "$0")/../.." && pwd)")")"
 JDK="$ROOT/_local/tools/jdk21/jdk-21.0.12.1+1"
 export JAVA_HOME="$(cygpath -w "$JDK")"
 export PATH="$JDK/bin:$PATH"
-cd "$ROOT/_local/tools/ghidra/ghidra_12.1.4_PUBLIC/support" && ./analyzeHeadless.bat "$@"
+# il .bat si chiama con il suo percorso corto completo: %~dp0 non deve mai contenere spazi
+"$ROOT/_local/tools/ghidra/ghidra_12.1.4_PUBLIC/support/analyzeHeadless.bat" "$@"
