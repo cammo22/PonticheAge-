@@ -14,3 +14,4 @@ type: log
 - Vault Obsidian creato con il plugin Karpathy LLM Wiki 1.28.0.
 - Scritte: [[Fattibilita e stima]], [[Roadmap v1.0.0]], [[Architettura server]], [[Rischi]].
 - Pipeline Ghidra verificata su `cryrenderd3d10.dll` (non protetta): 10.940 stringhe, trovate le variabili degli shader asincroni ([[Addon prestazioni client]]). Nota tecnica in [[Ghidra]]: percorsi con `/` e nome corto 8.3.
+- Correzione: anche `cry3dengine.dll` e `cryphysics.dll` sono protetti da [[Themida]] (Ghidra ne ha letto solo 34 stringhe). Elenco aggiornato in [[Client AA 9.0.2.9]].

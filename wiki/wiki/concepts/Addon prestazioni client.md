@@ -14,7 +14,7 @@ Niente correzioni alla cieca: si registrano i tempi di ogni fotogramma (PresentM
 | Causa | Rimedio |
 |---|---|
 | Compilazione degli shader durante il gioco | Traduzione D3D9/D3D10 -> Vulkan con cache e compilazione asincrona; precompilazione al primo avvio |
-| Caricamento di modelli e texture sul thread principale | Variabili del motore per lo streaming + hook delle funzioni di caricamento in `cry3dengine.dll` |
+| Caricamento di modelli e texture sul thread principale | Variabili del motore per lo streaming + hook delle funzioni di caricamento in `cry3dengine.dll` (protetto da [[Themida]]: va prima estratto dalla memoria) |
 | Allocatore di memoria lento/frammentato | Sostituire l'allocatore (il client usa gia' `tbbmalloc`/`shallocator.dll`) |
 | Ritmo dei fotogrammi irregolare | Limitatore di fotogrammi preciso, timer ad alta risoluzione |
 | Troppi personaggi in citta' | Livelli di dettaglio e distanze piu' aggressivi solo in quei casi |
