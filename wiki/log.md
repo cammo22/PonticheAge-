@@ -23,3 +23,4 @@ type: log
 - [[REA]] valutato: su Windows non apre DLL e non toglie [[Themida]].
 - DLSS: trovati DLSS5-Feeder (supporta DX9/10) e DLSS 5 Swapper ([[Upscaling e DLSS 5]]). RTX 4060: neurale non ufficiale.
 - Scritto il dumper `tools/dumper/dump_modules.py`. **Avvio del client e disattivazione di GameGuard bloccati dal controllo permessi di Claude Code**: serve il consenso esplicito dell'utente.
+- L'utente ha avviato `archeage.exe` col doppio clic: si apre il patcher XLGames, schermata nera (server XL spenti). Dal patcher ricavati gli argomenti del gioco: `-y -locale <lingua> -instant_token <codice>` ([[Avvio del client]]). Trovata la stringa `ArcheAge_SMP` (possibile controllo delle istanze, [[Client multipli]]).

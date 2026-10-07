@@ -7,6 +7,7 @@ type: index
 ## Concetti e decisioni
 - [[Addon prestazioni client]]
 - [[Architettura server]]
+- [[Avvio del client]]
 - [[Clean room]]
 - [[Client multipli]]
 - [[Dati di gioco]]
