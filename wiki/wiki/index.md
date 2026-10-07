@@ -8,6 +8,7 @@ type: index
 - [[Addon prestazioni client]]
 - [[Architettura server]]
 - [[Clean room]]
+- [[Client multipli]]
 - [[Dati di gioco]]
 - [[Fattibilita e stima]]
 - [[Launcher]]
@@ -16,6 +17,7 @@ type: index
 - [[Pannello server]]
 - [[Protocollo di rete]]
 - [[Qualita e test]]
+- [[Regole personalizzate]]
 - [[Rischi]]
 - [[Roadmap v1.0.0]]
 - [[Upscaling e DLSS 5]]
@@ -33,6 +35,7 @@ type: index
 ## Fonti
 - [[Archivio client 9.0.2.9]]
 - [[Progetto DaProdArcheage]]
+- [[Riferimenti 10.0.2]]
 
 ## Altro
 - [[Benvenuto]]

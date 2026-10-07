@@ -11,8 +11,9 @@ Tempi e motivazioni: [[Fattibilita e stima]]. Ogni voce si spunta solo quando ha
 - [x] Cartella e repo nuove, wiki
 - [x] Client 9.0.2.9 estratto in `_local/client`
 - [x] Ghidra, JDK, Universal Modder, REA in `_local/tools`
-- [ ] Il client parte in locale fino alla schermata di login (senza GameGuard/anti-cheat: vedi [[Client AA 9.0.2.9]])
-- [ ] Dumper nostro: copia `x2game.dll`, `crynetwork.dll`, `crysystem.dll` dalla memoria del client avviato e ricostruisce i PE leggibili da Ghidra ([[Themida]])
+- [ ] Il client parte in locale fino alla schermata di login (GameGuard/anti-cheat: vedi [[Client AA 9.0.2.9]]) — **in attesa del permesso dell'utente**
+- [ ] Identita' separata del client: non chiude gli altri ArcheAge ([[Client multipli]])
+- [ ] Dumper nostro (scritto: `tools/dumper/dump_modules.py`, mai eseguito): copia `x2game.dll`, `crynetwork.dll`, `crysystem.dll` dalla memoria del client avviato e ricostruisce i PE leggibili da Ghidra ([[Themida]])
 - [ ] Analisi Ghidra dei moduli estratti: stringhe, funzioni Lua, tabella dei pacchetti
 - [ ] Lettore del `game_pak` (formato e chiavi) e estrazione del database del client ([[Dati di gioco]])
 - [ ] Mappa del protocollo: handshake, cifratura, compressione, elenco dei codici ([[Protocollo di rete]])
@@ -31,6 +32,7 @@ Tempi e motivazioni: [[Fattibilita e stima]]. Ogni voce si spunta solo quando ha
 - [ ] NPC, mostri, IA, aggro, respawn; spawner dai livelli del game_pak (se presenti)
 - [ ] Loot, esperienza, livelli 1-55, **livelli ancestrali**
 - [ ] Inventario, banca, equipaggiamento, gradi, potenziamento e risveglio; Hiram fino a Celestial e oltre
+- [ ] Sintesi con Serendipity Stone a scelta diretta, pulsante per annullare l'effetto dell'arma ([[Regole personalizzate]])
 - [ ] Quest (storia, secondarie, ripetibili)
 - [ ] Testi tutti in inglese/italiano ([[Localizzazione]])
 - [ ] **v0.5**

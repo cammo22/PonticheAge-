@@ -9,7 +9,7 @@ Principi, nati dai problemi del vecchio progetto ([[Lezioni da DaProd]]):
 1. **Un solo processo di gioco.** Niente zone host esterni, niente desktop nascosti, niente processi che si perdono. Le zone sono oggetti dentro il server, ognuna con il suo ciclo di aggiornamento su un pool di thread.
 2. **Stato in memoria, database come salvataggio.** Ogni modifica (anche dal pannello) passa da un comando al server vivo, mai da un UPDATE sul database "sotto" al gioco. Cosi' oro, livelli, GM, labor funzionano sempre, online o offline.
 3. **Dati del gioco letti dal client**, mai copiati a mano: il database del client e i livelli del game_pak vengono convertiti in un formato nostro veloce al primo avvio ([[Dati di gioco]]).
-4. **Regole del gioco come dati.** Moltiplicatori, loot, prezzi, eventi in file di configurazione che il pannello modifica a caldo.
+4. **Regole del gioco come dati** ([[Regole personalizzate]]). Moltiplicatori, loot, prezzi, eventi in file di configurazione che il pannello modifica a caldo.
 5. **Testabile senza il client.** Il protocollo e' una libreria separata, usata sia dal server sia dal client finto dei test ([[Qualita e test]]).
 
 ## Tecnologia
