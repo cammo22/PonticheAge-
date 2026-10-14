@@ -1,5 +1,7 @@
 # PonticheAge
 
+[![Discord](https://img.shields.io/badge/Discord-DaProd-5865F2?logo=discord&logoColor=white)](https://discord.gg/Njs52aacwq)
+
 Server, launcher e addon client scritti da zero per **ArcheAge 9.0.2.9 (XLGames KX, r590504, 2022-09-21)**.
 
 Niente codice AAEmu: il protocollo e le regole del gioco si ricavano dal client (Ghidra) e dai suoi dati.
